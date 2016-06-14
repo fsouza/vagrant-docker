@@ -10,3 +10,4 @@ echo 'DOCKER_OPTS="$DOCKER_OPTS -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.
 
 sudo stop docker || true
 sudo start docker
+sudo usermod -G docker vagrant
