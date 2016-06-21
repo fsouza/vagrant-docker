@@ -2,7 +2,7 @@ Vagrant.configure(2) do |config|
 
   config.vm.provision :shell do |shell|
     shell.path = "install_docker.sh"
-    shell.args = "1.11.2"
+    shell.args = ENV["DOCKER_VERSION"] || "1.11.2"
   end
 
   nodes = ENV["DOCKER_NODES"].to_i
@@ -14,7 +14,7 @@ Vagrant.configure(2) do |config|
       d.vm.network "private_network", ip: "192.168.50.1#{node_id}"
 
       d.vm.provider "virtualbox" do |vb|
-        vb.memory = "2048"
+        vb.memory = ENV["DOCKER_MEMORY"] || "2048"
       end
     end
   end
