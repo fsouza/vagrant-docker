@@ -12,4 +12,4 @@ sudo sed -i 's;^ExecStart=.*;ExecStart=/usr/bin/dockerd -H tcp://0.0.0.0:2375 -H
 sudo systemctl daemon-reload
 sudo systemctl stop docker || true
 sudo systemctl start docker
-sudo usermod -G docker vagrant
+sudo usermod -G docker ubuntu
