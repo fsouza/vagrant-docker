@@ -12,6 +12,7 @@ Vagrant.configure(2) do |config|
     config.vm.define "docker_#{node_id}" do |d|
       d.vm.box = "ubuntu/xenial64"
       d.vm.network "private_network", ip: "192.168.50.1#{node_id}"
+      d.vm.hostname = "docker#{node_id}"
 
       d.vm.provider "virtualbox" do |vb|
         vb.memory = ENV["DOCKER_MEMORY"] || "2048"
