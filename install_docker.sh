@@ -6,11 +6,10 @@ echo "deb https://apt.dockerproject.org/repo ubuntu-${release} main" | sudo tee 
 sudo apt-get update
 sudo apt-get dist-upgrade -y
 
-sudo apt-get install docker-engine=${1}-0~${release} -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold"
+sudo apt-get install docker-engine=${1}-0~${release} -y --force-yes -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold"
 
-sudo sed -i 's;^ExecStart=.*;ExecStart=/usr/bin/dockerd -H tcp://0.0.0.0:2375 -H fd:// --insecure-registry=127.0.0.1:5000 --insecure-registry=192.168.50.4:5000;' /lib/systemd/system/docker.service
+echo 'DOCKER_OPTS="$DOCKER_OPTS -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock --insecure-registry=127.0.0.1:5000 --insecure-registry=192.168.50.4:5000"' >> /etc/default/docker
 
-sudo systemctl daemon-reload
-sudo systemctl stop docker || true
-sudo systemctl start docker
+sudo stop docker || true
+sudo start docker
 sudo usermod -G docker vagrant
