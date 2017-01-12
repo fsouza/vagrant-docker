@@ -2,7 +2,7 @@ Vagrant.configure(2) do |config|
 
   config.vm.provision :shell do |shell|
     shell.path = "install_docker.sh"
-    shell.args = ENV["DOCKER_VERSION"] || "1.12.1"
+    shell.args = ENV["DOCKER_VERSION"] || "1.12.6"
   end
 
   nodes = ENV["DOCKER_NODES"].to_i

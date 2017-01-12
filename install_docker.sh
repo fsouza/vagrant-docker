@@ -6,7 +6,7 @@ echo "deb https://apt.dockerproject.org/repo ubuntu-${release} main" | tee /etc/
 apt-get update
 apt-get dist-upgrade -y
 
-apt-get install docker-engine=${1}-0~${release} -y --force-yes -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold"
+apt-get install docker-engine=${1}-0~ubuntu-${release} -y --force-yes -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold"
 
 echo 'DOCKER_OPTS="$DOCKER_OPTS -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock --insecure-registry=127.0.0.1:5000 --insecure-registry=192.168.50.4:5000"' >> /etc/default/docker
 
